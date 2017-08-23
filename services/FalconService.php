@@ -41,10 +41,18 @@ class FalconService extends BaseApplicationComponent
 
     public function end()
     {
+        // By the time we get to here we want to also have collected any custom keys that
+        // were set for this template, they could be set anywhere in the hierarchy
+        // and thus will need to be sent using another twig tag I guess, like:
+        // `{{ falcon_add_key 'section:news' }}`
+        //
+        // Then on entry save we can send a purge with key 'section:handle' for new entries
+        //
+        // Worth noting that multiple keys can be set on the response headers to tag one item
+        // multiple times and on the PURGE request headers to purge multiple tags at once
+
         $this->_elementIds = array_values(array_unique($this->_elementIds));
         HeaderHelper::setHeader([
-            'Cache-Control' => 'no-cache',
-            'Pragma' => 'no-cache',
             'xkey' => implode(' ', $this->_elementIds)
         ]);
     }
