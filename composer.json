@@ -1,0 +1,14 @@
+{
+	"name": "joshangell/falcon",
+	"description": "Make Craft fly.",
+	"type": "craft-plugin",
+	"authors": [
+		{
+			"name": "Josh Angell",
+			"homepage": "https://angell.io"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}
