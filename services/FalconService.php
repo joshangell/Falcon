@@ -15,10 +15,38 @@ namespace Craft;
 
 class FalconService extends BaseApplicationComponent
 {
-    /**
-     */
-    public function exampleService()
+
+    private $_elementIds;
+
+
+    public function start()
     {
+        $this->_elementIds = [];
+    }
+
+    /**
+     * @param BaseElementModel $element
+     */
+    public function includeElement(BaseElementModel $element)
+    {
+
+        $elementId = $element->id;
+
+        if ($elementId)
+        {
+            $this->_elementIds[] = $elementId;
+        }
+
+    }
+
+    public function end()
+    {
+        $this->_elementIds = array_values(array_unique($this->_elementIds));
+        HeaderHelper::setHeader([
+            'Cache-Control' => 'no-cache',
+            'Pragma' => 'no-cache',
+            'xkey' => implode(' ', $this->_elementIds)
+        ]);
     }
 
 }
