@@ -100,6 +100,8 @@ class FalconPlugin extends BasePlugin
      */
     public function addTwigExtension()
     {
+        Craft::import('plugins.falcon.twigextensions.Falcon_AddKey_TokenParser');
+        Craft::import('plugins.falcon.twigextensions.Falcon_AddKey_Node');
         Craft::import('plugins.falcon.twigextensions.Falcon_TokenParser');
         Craft::import('plugins.falcon.twigextensions.Falcon_Node');
         Craft::import('plugins.falcon.twigextensions.FalconTwigExtension');

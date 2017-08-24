@@ -10,9 +10,13 @@ class Falcon_Node extends \Twig_Node
             ->addDebugInfo($this)
             ->write("\$falconService = \Craft\craft()->falcon;\n")
             ->write("\$falconService->start();\n")
-            // TODO: compile some other kind of tag in here so we can collate extra keys to send to ->end()
             ->subcompile($this->getNode('body'))
-            ->write("\$falconService->end();\n")
+            ->write("\$keys = [];")
+            ->write("if (isset(\$context['falcon_keys']) && is_array(\$context['falcon_keys'])) {\n")
+                ->indent()
+                ->write("\$keys = \$context['falcon_keys'];\n")
+            ->write("}\n")
+            ->write("\$falconService->end(\$keys);\n")
         ;
     }
 

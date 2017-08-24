@@ -28,6 +28,7 @@ class FalconTwigExtension extends \Twig_Extension
     {
         return [
             new Falcon_TokenParser(),
+            new Falcon_AddKey_TokenParser(),
         ];
     }
 
