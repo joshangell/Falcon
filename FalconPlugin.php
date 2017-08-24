@@ -21,6 +21,7 @@ class FalconPlugin extends BasePlugin
     public function init()
     {
         parent::init();
+        $this->_registerEventHandlers();
     }
 
     /**
@@ -110,26 +111,23 @@ class FalconPlugin extends BasePlugin
     }
 
     /**
+     * Register the event handlers.
      */
-    public function onBeforeInstall()
+    private function _registerEventHandlers()
     {
-    }
+        craft()->on('elements.onSaveElement', function(Event $event) {
+            $element = $event->params['element'];
+            $isNewElement = $event->params['isNewElement'];
 
-    /**
-     */
-    public function onAfterInstall()
-    {
-    }
 
-    /**
-     */
-    public function onBeforeUninstall()
-    {
-    }
+            // PURGE
+            // 1. Send to service
+            // 2. In service, add to Task
 
-    /**
-     */
-    public function onAfterUninstall()
-    {
+
+            //            MATRIX?
+
+
+        });
     }
 }
