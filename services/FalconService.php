@@ -16,29 +16,36 @@ namespace Craft;
 class FalconService extends BaseApplicationComponent
 {
 
+    // Properties
+    // =========================================================================
+
+    /**
+     * @var
+     */
     private $_elementIds;
 
+    // Public Methods
+    // =========================================================================
 
+    /**
+     *
+     */
     public function start()
     {
         $this->_elementIds = [];
     }
 
     /**
-     * @param BaseElementModel $element
+     * @param $elementId
      */
-    public function includeElement(BaseElementModel $element)
+    public function includeElement($elementId)
     {
-
-        $elementId = $element->id;
-
-        if ($elementId)
-        {
-            $this->_elementIds[] = 'el:'.$elementId;
-        }
-
+        $this->_elementIds[] = 'el:'.$elementId;
     }
 
+    /**
+     * @param array $keys
+     */
     public function end($keys = [])
     {
         $this->_elementIds = array_values(array_unique($this->_elementIds));
@@ -48,7 +55,7 @@ class FalconService extends BaseApplicationComponent
             'xkey' => implode(' ', $combinedKeys)
         ]);
 
-        // DEBUG
+        // XXX DEBUG
         print_r(implode(' ', $combinedKeys));
     }
 

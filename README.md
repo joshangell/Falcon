@@ -11,6 +11,15 @@ To install Falcon, follow these steps:
 3.  -OR- install with Composer via `composer require joshangell/falcon`
 4. Install plugin in the Craft Control Panel under Settings > Plugins
 5. The plugin folder should be named `falcon` for Craft to see it.  GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
+6. Copy the code below into `craft/app/etc/templating/BaseTemplate.php`, inserting it after `if ($cacheService) { ... }` in the `_includeElementInTemplateCaches` method: 
+
+```php
+$falcon = craft()->getComponent('falcon', false);
+if ($falcon) {
+    $falcon->includeElement($elementId);
+}
+
+```
 
 Falcon works on Craft 2.4.x and Craft 2.5.x.
 
