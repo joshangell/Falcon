@@ -12,6 +12,9 @@ namespace Craft;
  * @package   Falcon
  * @since     0.0.1
  */
+
+require __DIR__.'/vendor/autoload.php';
+
 class FalconPlugin extends BasePlugin
 {
     /**
