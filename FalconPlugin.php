@@ -1,4 +1,6 @@
 <?php
+namespace Craft;
+
 /**
  * Falcon plugin for Craft CMS
  *
@@ -10,9 +12,6 @@
  * @package   Falcon
  * @since     0.0.1
  */
-
-namespace Craft;
-
 class FalconPlugin extends BasePlugin
 {
     /**
@@ -119,14 +118,11 @@ class FalconPlugin extends BasePlugin
             $element = $event->params['element'];
             $isNewElement = $event->params['isNewElement'];
 
-
-            // PURGE
-            // 1. Send to service
-            // 2. In service, add to Task
-
-
-            //            MATRIX?
-
+            // Standard element ID based purges
+            if (!$isNewElement && $element->id) {
+                // In service, load up the required interface, which probably won’t need a task given we doing token based purges
+                craft()->falcon->purgeById($element->id);
+            }
 
         });
     }

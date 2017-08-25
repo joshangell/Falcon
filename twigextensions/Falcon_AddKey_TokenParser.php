@@ -1,13 +1,26 @@
 <?php
 namespace Craft;
 
-
+/**
+ * Class Falcon_AddKey_TokenParser
+ *
+ * @author    Josh Angell
+ * @copyright Copyright (c) 2017 Josh Angell
+ * @link      https://angell.io
+ * @package   Falcon
+ * @since     0.0.1
+ */
 class Falcon_AddKey_TokenParser extends \Twig_TokenParser
 {
 
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param \Twig_Token $token
+     *
+     * @return Falcon_AddKey_Node
+     */
     public function parse(\Twig_Token $token)
     {
         $parser = $this->parser;
@@ -19,6 +32,9 @@ class Falcon_AddKey_TokenParser extends \Twig_TokenParser
         return new Falcon_AddKey_Node([], ['key' => $key], $token->getLine(), $this->getTag());
     }
 
+    /**
+     * @return string
+     */
     public function getTag()
     {
         return 'falcon_addkey';

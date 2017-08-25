@@ -1,8 +1,8 @@
 <?php
+namespace Craft;
+
 /**
- * Falcon plugin for Craft CMS
- *
- * Falcon Twig Extension
+ * Class FalconTwigExtension
  *
  * @author    Josh Angell
  * @copyright Copyright (c) 2017 Josh Angell
@@ -10,9 +10,6 @@
  * @package   Falcon
  * @since     0.0.1
  */
-
-namespace Craft;
-
 class FalconTwigExtension extends \Twig_Extension
 {
 
@@ -32,6 +29,11 @@ class FalconTwigExtension extends \Twig_Extension
         ];
     }
 
+    /**
+     * Required but deprecated...
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'Falcon';
