@@ -14,7 +14,7 @@ To install Falcon, follow these steps:
 6. Copy the code below into `craft/app/etc/templating/BaseTemplate.php`, inserting it after `if ($cacheService) { ... }` in the `_includeElementInTemplateCaches` method: 
 
 ```php
-$falcon = craft()->getComponent('falcon', false);
+$falcon = craft()->getComponent('falcon_templates', false);
 if ($falcon) {
     $falcon->includeElement($elementId);
 }

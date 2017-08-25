@@ -2,7 +2,7 @@
 /**
  * Falcon plugin for Craft CMS
  *
- * Falcon Service
+ * Falcon_Templates Service
  *
  * @author    Josh Angell
  * @copyright Copyright (c) 2017 Josh Angell
@@ -13,7 +13,7 @@
 
 namespace Craft;
 
-class FalconService extends BaseApplicationComponent
+class Falcon_TemplatesService extends BaseApplicationComponent
 {
 
     // Properties

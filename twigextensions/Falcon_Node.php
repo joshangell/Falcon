@@ -8,7 +8,7 @@ class Falcon_Node extends \Twig_Node
     {
         $compiler
             ->addDebugInfo($this)
-            ->write("\$falconService = \Craft\craft()->falcon;\n")
+            ->write("\$falconService = \Craft\craft()->falcon_templates;\n")
             ->write("\$falconService->start();\n")
             ->subcompile($this->getNode('body'))
             ->write("\$keys = [];")
