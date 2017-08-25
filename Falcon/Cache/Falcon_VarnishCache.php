@@ -45,10 +45,9 @@ class Falcon_VarnishCache implements Falcon_CacheInterface
                     'message' => $response->getReasonPhrase()
                 ]);
                 throw new \Exception($errorMsg);
-
             }
         } catch (\Exception $e) {
-            throw $e;
+            \Craft\FalconPlugin::log($e->getMessage(), \Craft\LogLevel::Error);
         }
 
     }
