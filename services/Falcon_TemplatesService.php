@@ -53,7 +53,7 @@ class Falcon_TemplatesService extends BaseApplicationComponent
         ]);
 
         // XXX DEBUG
-        print_r(implode(' ', $combinedKeys));
+        // print_r(implode(' ', $combinedKeys));
     }
 
 }
