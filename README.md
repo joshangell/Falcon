@@ -1,6 +1,6 @@
 # Falcon plugin for Craft CMS
 
-Make Craft fly.
+Make Craft fly. Well, stick a reverse proxy in front of it then auto-magically invalidate the right caches.
 
 ## Installation
 
@@ -21,15 +21,45 @@ if ($falcon) {
 
 ```
 
+Yes that was a core hack. High up on my list is to get this working on Craft 3, which I beleive will allow me to do what I need to without modifying the core.
+
 Falcon works on Craft 2.4.x and Craft 2.5.x.
 
 ## Falcon Overview
 
--Insert text here-
+Currently very un-configurable.
+
+The Varnish URL is set to `http://0.0.0.0:8080/`, the headers used are `xkey` specific, silly things are happening like Matrix blocks are getting their IDs sent out, there are no Tasks and custom keys aren’t purged.
+ 
+But hey, this is basically still classed as an experiment.
 
 ## Configuring Falcon
 
--Insert text here-
+You need to do this in your layout:
+
+```twig
+{% falcon %}
+
+<!DOCTYPE html>
+<html>
+    <head>...</head>
+    <body>
+        ...
+    </body>
+</html>
+{% endfalcon %}
+```
+
+Then elsewhere:
+```twig
+{% extends "_layout" %}
+
+{% falcon_addkey 'section:news' %}
+
+{% block content %}
+...
+{% endblock %}
+```
 
 ## Using Falcon
 
@@ -37,8 +67,15 @@ Falcon works on Craft 2.4.x and Craft 2.5.x.
 
 ## Falcon Roadmap
 
-Some things to do, and ideas for potential features:
+These things need to happen before it can be considered ready for use:
 
-* Release it
+* Listen to specific entry on save, if new, send `section:handle` purge requests or whatever we do when doing the extra tagging during render.
+* Probably expand that whole thing to be configurable so that people can do whatever they like.
+* Make the xkey header bit configurable, as well as the actual purge tooling so that we can swap between fastly and BYO varnish.
+* Make cache interface configurable incl URL and type of interface.
+* Send PURGEs as Task so they can be queued up.
+* Check a configurable list of dis-allowed element types to ignore from auto element ID collection, like Matrix/Neo/SuperTable blocks.
+* Make a Craft 3 version without a core hack. Brandon said something about swapping out core components once that makes me think this is possible. 
+
 
 Brought to you by [Josh Angell](https://angell.io)
