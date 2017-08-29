@@ -1,4 +1,6 @@
 <?php
+namespace Craft;
+
 /**
  * Falcon plugin for Craft CMS
  *
@@ -11,7 +13,7 @@
  * @since     0.0.1
  */
 
-namespace Craft;
+require __DIR__.'/vendor/autoload.php';
 
 class FalconPlugin extends BasePlugin
 {
@@ -21,6 +23,7 @@ class FalconPlugin extends BasePlugin
     public function init()
     {
         parent::init();
+        $this->_registerEventHandlers();
     }
 
     /**
@@ -100,32 +103,30 @@ class FalconPlugin extends BasePlugin
      */
     public function addTwigExtension()
     {
+        Craft::import('plugins.falcon.twigextensions.Falcon_AddKey_TokenParser');
+        Craft::import('plugins.falcon.twigextensions.Falcon_AddKey_Node');
+        Craft::import('plugins.falcon.twigextensions.Falcon_TokenParser');
+        Craft::import('plugins.falcon.twigextensions.Falcon_Node');
         Craft::import('plugins.falcon.twigextensions.FalconTwigExtension');
 
         return new FalconTwigExtension();
     }
 
     /**
+     * Register the event handlers.
      */
-    public function onBeforeInstall()
+    private function _registerEventHandlers()
     {
-    }
+        craft()->on('elements.onSaveElement', function(Event $event) {
+            $element = $event->params['element'];
+            $isNewElement = $event->params['isNewElement'];
 
-    /**
-     */
-    public function onAfterInstall()
-    {
-    }
+            // Standard element ID based purges
+            if (!$isNewElement && $element->id) {
+                // In service, load up the required interface, which probably won’t need a task given we doing token based purges
+                craft()->falcon->purgeById($element->id);
+            }
 
-    /**
-     */
-    public function onBeforeUninstall()
-    {
-    }
-
-    /**
-     */
-    public function onAfterUninstall()
-    {
+        });
     }
 }

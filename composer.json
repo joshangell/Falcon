@@ -10,5 +10,11 @@
 	],
 	"require": {
 		"composer/installers": "~1.0"
+	},
+	"config" : {
+		"optimize-autoloader": true
+	},
+	"autoload": {
+		"psr-4": {"Falcon\\": "Falcon/"}
 	}
 }
