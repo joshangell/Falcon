@@ -1,3 +1,9 @@
+# This plugin was an experiment! It is now archived.
+
+I advise you take a look at [Upper](https://github.com/ostark/upper) for Craft 3 by the wonderful [Oliver Stark](https://github.com/ostark).
+
+---
+
 # Falcon plugin for Craft CMS
 
 Make Craft fly. Well, stick a reverse proxy in front of it then auto-magically invalidate the right caches.
@@ -21,7 +27,7 @@ if ($falcon) {
 
 ```
 
-Yes that was a core hack. High up on my list is to get this working on Craft 3, which I beleive will allow me to do what I need to without modifying the core.
+Yes that was a core hack, which is always necessary on Craft 2.
 
 Falcon works on Craft 2.4.x and Craft 2.5.x.
 
